@@ -59,7 +59,9 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
 
-
+if(process.env.PORT === undefined){
+    process.env.PORT = 3000;
+}
 app.listen(process.env.PORT, (err)=>{
     if(err){
         console.log(`Error: ${err.message}`)
