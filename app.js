@@ -59,6 +59,10 @@ app.use("/campgrounds", campgroundRoutes);
 app.use("/campgrounds/:id/comments", commentRoutes);
 
 
+app.get('*', (req, res) => {
+    res.redirect("/campgrounds");
+});
+
 if(process.env.PORT === undefined){
     process.env.PORT = 3000;
 }

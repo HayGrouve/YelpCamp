@@ -48,6 +48,20 @@ html {
   .container .text-muted {
     margin: 20px 0;
   }
+  #comment-box{
+      background-color: white;
+      margin-bottom: 6px;
+      padding-top: 5px;
+      padding-bottom: 5px;
+      
+  }
+  #index-campground-img{
+      height: 176px;
+  }
+  #campground-index-thumbnail{
+      height: 330px;
+  }
+  
 
 
 

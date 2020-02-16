@@ -23,13 +23,21 @@
 <div class="row" style="display: flex; flex-wrap: wrap;">
     <% campgrounds.forEach(campground => { %>
     <div class="col-md-3 col-sm-6 text-center">
-        <div class="thumbnail">
-            <img src="<%= campground.image %>" alt="campground-imgage">
+        <div id="campground-index-thumbnail" class="thumbnail">
+            <img id="index-campground-img" src="<%= campground.image %>" alt="campground-imgage">
             <div class="caption">
                 <h4><%= campground.name %></h4>
+                <div>
+                    <% if(campground.description.length > 50){ %>
+                    <p><%= campground.description.substring(0,50) %>...</p>
+                    <% }else{%>
+                        <p><%= campground.description %></p>
+                    <% } %>
+                </div>
             </div>
             <p>
-                <a href="/campgrounds/<%=campground._id %>" class="btn btn-primary show-btn"><i class="fas fa-info-circle"></i> More Info</a>
+                <a href="/campgrounds/<%=campground._id %>" class="btn btn-primary show-btn"><i
+                        class="fas fa-info-circle"></i> More Info</a>
             </p>
         </div>
     </div>
