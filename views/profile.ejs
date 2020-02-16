@@ -1,0 +1,44 @@
+<%- include("./partials/header") %>
+
+<h1><%= user.username %>'s Profile</h1>
+<div class="row">
+    <div class="col-md-4">
+        <div class="thumbnail">
+            <img src="<%= user.avatar %>" alt="User Avatar">
+            <div class="caption">
+                <p><%= user.firstname %> <%= user.lastname %>, <%= user.age %></p>
+                <section>
+                    <%= user.description %>
+                </section>
+                <hr>
+                <a href="mailto:<%= user.email %>"><%= user.email %></a>
+                <% if(currentUser && user._id.equals(currentUser._id) || currentUser && currentUser.isAdmin ) { %>
+                <form class="deleteForm" action="/users/<%= user._id %>?_method=DELETE" method="post"
+                    style="float: right;">
+                    <button class="btn btn-xs btn-danger">Delete</button>
+                </form>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8" style="text-align: center;">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading">
+                <h2>Campgrounds</h2>
+            </div>
+            <!-- List group -->
+            <ul style="padding-left: 0;">
+                <% campgrounds.forEach(campground => { %>
+                <li style="list-style-type: none;">
+                    <a href="/campgrounds/<%= campground.id %>">
+                        <h3><%= campground.name %></h3>
+                    </a>
+                </li>
+                <% }); %>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<%- include("./partials/footer") %>
