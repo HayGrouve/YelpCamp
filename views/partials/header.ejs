@@ -9,13 +9,14 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="/stylesheets/fontawesome/css/all.css">
     <link rel="stylesheet" href="/stylesheets/main.css">
     <title>YelpCamp</title>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -26,22 +27,22 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a class="navbar-brand" href="/">YelpCamp</a>
+                <a class="navbar-brand" href="/"><i class="fas fa-tree"></i> YelpCamp</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="<%= typeof page !== 'undefined' && page === 'campgrounds' ? 'active' : '' %>"><a
-                            href="/campgrounds">Home</a></li>
+                            href="/campgrounds"><i class="fas fa-home"></i> Home</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <% if(!currentUser){ %>
                     <li class="<%= typeof page !== 'undefined' && page === 'login' ? 'active' : '' %>"><a
-                            href="/login">Login</a></li>
+                            href="/login"><i class="fas fa-user"></i> Login</a></li>
                     <li class="<%= typeof page !== 'undefined' && page === 'register' ? 'active' : '' %>"><a
-                            href="/register">Sign Up</a></li>
+                            href="/register"><i class="fas fa-user-plus"></i> Sign Up</a></li>
                     <% } else { %>
                     <li><a href="/users/<%= currentUser.id %>">Signed In As <%= currentUser.username %></a></li>
-                    <li><a href="/logout">Logout</a></li>
+                    <li><a href="/logout"><i class="fas fa-user-times"></i> Logout</a></li>
                     <% } %>
                 </ul>
             </div>

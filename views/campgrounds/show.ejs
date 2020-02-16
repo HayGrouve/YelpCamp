@@ -20,16 +20,16 @@
                         <%= moment(campground.createdAt).fromNow() %></em>
                 </p>
                 <% if(currentUser && campground.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
-                <a class="btn btn-xs btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+                <a class="btn btn-xs btn-warning" href="/campgrounds/<%= campground._id %>/edit"><i class="fas fa-edit"></i> Edit</a>
                 <form class="deleteForm" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="post">
-                    <button class="btn btn-xs btn-danger">Delete</button>
+                    <button class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
                 </form>
                 <% } %>
             </div>
         </div>
         <div class="well">
             <div class="text-right">
-                <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add Comment</a>
+                <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new"><i class="fas fa-plus"></i> Add Comment</a>
             </div>
             <hr>
             <% campground.comments.forEach(comment => { %>
@@ -41,12 +41,12 @@
                     <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
                     <a class="btn btn-xs btn-warning"
                         href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">
-                        Edit
+                        <i class="fas fa-edit"></i> Edit
                     </a>
                     <form class="deleteForm"
                         action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE"
                         method="post">
-                        <button class="btn btn-xs btn-danger">Delete</button>
+                        <button class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
                     </form>
                     <% } %>
                 </div>

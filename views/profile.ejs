@@ -15,7 +15,7 @@
                 <% if(currentUser && user._id.equals(currentUser._id) || currentUser && currentUser.isAdmin ) { %>
                 <form class="deleteForm" action="/users/<%= user._id %>?_method=DELETE" method="post"
                     style="float: right;">
-                    <button class="btn btn-xs btn-danger">Delete</button>
+                    <button class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
                 </form>
                 <% } %>
             </div>

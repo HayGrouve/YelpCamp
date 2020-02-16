@@ -3,6 +3,10 @@
 }
 .thumbnail{
     padding: 0;
+    border: 0;
+}
+.show-btn{
+    margin-bottom: 12px;
 }
 .deleteForm{
     display: inline;
@@ -13,6 +17,7 @@
 }
 body{
     background-color: #70809062;
+    padding-top: 5%;
 }
 
 .navbar{
@@ -43,5 +48,7 @@ html {
   .container .text-muted {
     margin: 20px 0;
   }
+
+
 
  
