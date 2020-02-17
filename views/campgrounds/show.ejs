@@ -35,7 +35,7 @@
             <% campground.comments.forEach(comment => { %>
             <div class="row">
                 <div class="col-md-12" id="comment-box">
-                    <strong><%= comment.author.username %></strong>
+                    <strong><a href="/users/<%= comment.author.id %>"><%= comment.author.username %></a></strong>
                     <span class="pull-right"><i class="far fa-clock"></i> <%= moment(comment.createdAt).fromNow() %></span>
                     <p id="comment-text"><%= comment.text %></p>
                     <% if(currentUser && comment.author.id.equals(currentUser._id) || currentUser && currentUser.isAdmin) { %>
