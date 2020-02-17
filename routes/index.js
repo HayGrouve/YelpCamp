@@ -19,6 +19,9 @@ router.get('/register', (req, res) => {
 });
 //SIGN UP LOGIC
 router.post('/register', (req, res) => {
+    if (req.body.avatar === "") {
+        req.body.avatar = "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+    }
     var newUser = new User({
         username: req.body.username,
         firstname: req.body.firstname,
@@ -72,6 +75,28 @@ router.get('/users/:id', (req, res) => {
                     res.render("profile", { user: foundUser, campgrounds: foundCampgrounds });
                 }
             });
+        }
+    });
+});
+
+//EDIT PROFILE
+router.get('/users/:id/edit', middleware.checkUserOwnership, (req, res) => {
+    User.findById(req.params.id, (err, foundUser) => {
+        res.render("edit", { user: foundUser });
+    });
+});
+
+//UPDATE PROFILE
+router.put('/users/:id', middleware.checkUserOwnership, (req, res) => {
+    if (req.body.user.avatar === "") {
+        req.body.user.avatar = "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
+    }
+    User.findByIdAndUpdate(req.params.id, req.body.user, { useFindAndModify: false }, (err, updatedUser) => {
+        if (err) {
+            console.log(err);
+        } else {
+            req.flash("success", "User Updated!");
+            res.redirect("/users/" + req.params.id);
         }
     });
 });

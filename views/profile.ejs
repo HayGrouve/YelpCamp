@@ -13,10 +13,12 @@
                 <hr>
                 <a href="mailto:<%= user.email %>"><%= user.email %></a>
                 <% if(currentUser && user._id.equals(currentUser._id) || currentUser && currentUser.isAdmin ) { %>
-                <form class="deleteForm" action="/users/<%= user._id %>?_method=DELETE" method="post"
-                    style="float: right;">
-                    <button class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
-                </form>
+                <div style="float: right;">
+                    <a class="btn btn-xs btn-warning" href="/users/<%= currentUser.id %>/edit"><i class="fas fa-edit"></i> Edit</a>
+                    <form class="deleteForm" action="/users/<%= user._id %>?_method=DELETE" method="post">
+                        <button class="btn btn-xs btn-danger"><i class="fas fa-trash-alt"></i></button>
+                    </form>
+                </div>
                 <% } %>
             </div>
         </div>

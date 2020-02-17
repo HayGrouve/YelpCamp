@@ -32,6 +32,9 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
     var name = req.body.name;
     var price = req.body.price;
     var image = req.body.image;
+    if(image === ""){
+        image = "https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
+    }
     var description = req.body.description;
     var author = {
         id: req.user._id,

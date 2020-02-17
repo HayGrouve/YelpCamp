@@ -63,7 +63,7 @@ middlewareObj.checkUserOwnership = function (req, res, next) {
                 res.redirect("back");
             }
             else {
-                //does the user own the comment
+                //does the user own itself
                 if (foundUser._id.equals(req.params.id) || req.user.isAdmin) {
                     next();
                 } else {
