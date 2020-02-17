@@ -17,7 +17,8 @@
 }
 body{
     background-color: #70809062;
-    padding-top: 5%;
+    padding-top: 80px;
+    margin-bottom: 60px;
 }
 
 .navbar{
@@ -31,10 +32,6 @@ body{
 html {
     position: relative;
     min-height: 100%;
-  }
-  body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
   }
   .footer {
     position: absolute;
@@ -60,6 +57,10 @@ html {
   }
   #campground-index-thumbnail{
       height: 330px;
+  }
+
+  #comment-text{
+    word-wrap: break-word;
   }
   
 
