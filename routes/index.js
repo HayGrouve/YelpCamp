@@ -129,7 +129,7 @@ router.post('/forgot', function (req, res, next) {
                 service: 'Gmail',
                 auth: {
                     user: 'learningtocodecekov@gmail.com',
-                    pass: "dabal1dabal1a"
+                    pass: process.env.GMAILPW
                 }
             });
             var mailOptions = {
@@ -192,7 +192,7 @@ router.post('/reset/:token', function (req, res) {
             var smtpTransport = nodemailer.createTransport({
                 service: 'Gmail',
                 auth: {
-                    user: 'haygrouve@gmail.com',
+                    user: 'learningtocodecekov@gmail.com',
                     pass: process.env.GMAILPW
                 }
             });
