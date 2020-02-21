@@ -64,8 +64,8 @@ router.get('/logout', (req, res) => {
 //USER PROFILE
 router.get('/users/:id', (req, res) => {
     User.findById(req.params.id, (err, foundUser) => {
-        if (err) {
-            req.flash("error", "Something went wrong!");
+        if (err || !foundUser) {
+            req.flash("error", "User not found!");
             res.redirect("/campgrounds");
         } else {
             Campground.find().where('author.id').equals(foundUser._id).exec((err, foundCampgrounds) => {
