@@ -16,6 +16,7 @@ var commentRoutes = require("./routes/comments"),
     campgroundRoutes = require("./routes/campgrounds"),
     indexRoutes = require("./routes/index");
 var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp";
+var port = process.env.PORT || 3000;
     mongoose.connect(url, {
         useNewUrlParser: true,
         useCreateIndex: true,
@@ -63,13 +64,10 @@ app.get('*', (req, res) => {
     res.redirect("/campgrounds");
 });
 
-if(process.env.PORT === undefined){
-    process.env.PORT = 3000;
-}
-app.listen(process.env.PORT, (err)=>{
+app.listen(port, (err)=>{
     if(err){
         console.log(`Error: ${err.message}`)
     }else{
-        console.log(`App running on port ${process.env.PORT}`);
+        console.log(`App running on port ${port}`);
     }
 });

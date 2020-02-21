@@ -3,6 +3,7 @@ var express = require("express"),
     passport = require("passport"),
     Campground = require("../models/campground"),
     User = require("../models/user"),
+    Comment = require("../models/comment"),
     async = require("async"),
     nodemailer = require("nodemailer"),
     crypto = require("crypto"),
@@ -103,20 +104,32 @@ router.put('/users/:id', middleware.checkUserOwnership, (req, res) => {
 
 //DELETE PROFILE
 router.delete('/users/:id', middleware.checkUserOwnership, (req, res) => {
-    User.findByIdAndRemove(req.params.id, { useFindAndModify: false }, (err, foundUser) => {
+    User.findById(req.params.id, { useFindAndModify: false }, (err, foundUser) => {
         if (err) {
+            req.flash("error", "No User Profile Found!");
             res.redirect("/campgrounds");
         } else {
             Campground.find().where('author.id').equals(foundUser._id).exec((err, foundCampgrounds) => {
-                Campground.findByIdAndRemove(foundCampgrounds, { useFindAndModify: false }, (err) => {
-                    if (err) {
-                        res.redirect("/campgrounds");
-                    } else {
-                        req.flash("error", "User Profile And Campgrounds Deleted!");
-                        res.redirect("/campgrounds");
-                    }
-                });
+                if (err) {
+                    req.flash("error", "Something went wrong!");
+                    res.redirect("/campgrounds");
+                } else {
+                    foundCampgrounds.forEach(campground => {
+                        Comment.deleteMany({
+                            "_id": { $in: campground.comments }
+                        }, (err) => {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                campground.deleteOne();
+                            }
+                        });
+                    });
+                }
             });
+            foundUser.deleteOne();
+            req.flash("error", "User Profile And Campgrounds Deleted!");
+            res.redirect("/campgrounds");
         }
     });
 });

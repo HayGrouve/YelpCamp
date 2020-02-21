@@ -1,7 +1,8 @@
-var express = require("express"),
+const express = require("express"),
     router = express.Router(),
     Campground = require("../models/campground"),
-    middleware = require("../middleware/");
+    middleware = require("../middleware/"),
+    Comment = require("../models/comment");
 
 // INDEX ROUTE
 router.get('/', (req, res) => {
@@ -32,7 +33,7 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
     var name = req.body.name;
     var price = req.body.price;
     var image = req.body.image;
-    if(image === ""){
+    if (image === "") {
         image = "https://images.unsplash.com/photo-1476041800959-2f6bb412c8ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
     }
     var description = req.body.description;
@@ -83,10 +84,20 @@ router.put('/:id', middleware.checkCampgroundOwnership, (req, res) => {
 });
 //DELETE ROUTE
 router.delete('/:id', middleware.checkCampgroundOwnership, (req, res) => {
-    Campground.findByIdAndRemove(req.params.id, { useFindAndModify: false }, (err) => {
+    Campground.findById(req.params.id, (err, campground) => {
         if (err) {
+            req.flash("error", "Something went wrong!");
             res.redirect("/campgrounds");
         } else {
+            Comment.deleteMany({
+                "_id": { $in: campground.comments }
+            }, (err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    campground.deleteOne();
+                }
+            });
             req.flash("error", "Campground Deleted!");
             res.redirect("/campgrounds");
         }
