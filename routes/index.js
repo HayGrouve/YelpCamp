@@ -83,6 +83,10 @@ router.get('/users/:id', (req, res) => {
 //EDIT PROFILE
 router.get('/users/:id/edit', middleware.checkUserOwnership, (req, res) => {
     User.findById(req.params.id, (err, foundUser) => {
+        if(err || !foundUser){
+            req.flash("error", "User not found!");
+            res.redirect("/campgrounds");
+        }
         res.render("edit", { user: foundUser });
     });
 });
