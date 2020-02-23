@@ -97,8 +97,9 @@ router.put('/users/:id', middleware.checkUserOwnership, (req, res) => {
         req.body.user.avatar = "https://iupac.org/wp-content/uploads/2018/05/default-avatar.png"
     }
     User.findByIdAndUpdate(req.params.id, req.body.user, { useFindAndModify: false }, (err, updatedUser) => {
-        if (err) {
-            console.log(err);
+        if (err || !updatedUser) {
+            req.flash("error", "User not found!");
+            res.redirect("/campgrounds");
         } else {
             req.flash("success", "User Updated!");
             res.redirect("/users/" + req.params.id);
