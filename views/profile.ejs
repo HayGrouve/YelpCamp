@@ -14,7 +14,7 @@
                 <a href="mailto:<%= user.email %>"><%= user.email %></a>
                 <% if(currentUser && user._id.equals(currentUser._id) || currentUser && currentUser.isAdmin ) { %>
                 <div style="float: right;">
-                    <a class="btn btn-xs btn-warning" href="/users/<%= currentUser.id %>/edit"><i class="fas fa-edit"></i> Edit</a>
+                    <a class="btn btn-xs btn-warning" href="/users/<%= user.id %>/edit"><i class="fas fa-edit"></i> Edit</a>
                     <form class="deleteForm" action="/users/<%= user._id %>?_method=DELETE" method="post">
                         <button class="btn btn-xs btn-danger" onclick="return confirm('Are you sure you want to delete your profile?');"><i class="fas fa-trash-alt"></i></button>
                     </form>
